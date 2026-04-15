@@ -47,8 +47,53 @@ const images = [
     ...slideSize,
   }),
 ]
+
+const topic = {
+  eyebrow: 'Technology brief',
+  title: 'Solid-state batteries',
+  intro:
+    'An innovation-track file for teams planning future procurement, safety-sensitive applications, and supplier qualification before commercial volume is assumed.',
+  status: 'Innovation track',
+  updated: 'Reviewed April 2026',
+  actions: [
+    { label: 'Request supplier screening', to: '/contact', primary: true },
+    { label: 'Back to overview', to: '/', primary: false },
+  ],
+  contents: [
+    { label: 'Brief', href: '#brief' },
+    { label: 'Source deck', href: '#source-deck' },
+  ],
+  metrics: [
+    { value: 'pilot', label: 'qualification-first route' },
+    { value: 'safe', label: 'safety-sensitive applications' },
+    { value: 'future', label: 'procurement horizon planning' },
+  ],
+  briefs: [
+    {
+      kicker: 'Where it fits',
+      title: 'Premium and safety-led planning',
+      text: 'Relevant for premium mobility, compact devices, aerospace-adjacent conversations, and buyers preparing a longer qualification path.',
+    },
+    {
+      kicker: 'What to verify',
+      title: 'Readiness level before claims',
+      text: 'Screen sample availability, cell format, pilot-line maturity, abuse testing, interface stability, and whether commercial dates match evidence.',
+    },
+    {
+      kicker: 'Decision risk',
+      title: 'Promise can outrun production',
+      text: 'The file should separate credible near-term supply from roadmap narratives that are useful strategically but not yet ready for procurement.',
+    },
+  ],
+}
 </script>
 
 <template>
-  <ImageStackPage :images="images" />
+  <ImageStackPage
+    :images="images"
+    :topic="topic"
+    section-id="source-deck"
+    library-title="Solid-state source deck"
+    library-intro="Original technical visuals for advanced-cell discussions, kept as supporting evidence after the brief."
+  />
 </template>

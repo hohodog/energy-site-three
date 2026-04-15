@@ -44,8 +44,54 @@ const images = [
     ...slideSize,
   }),
 ]
+
+const topic = {
+  eyebrow: 'Technology brief',
+  title: 'Sodium-ion batteries',
+  intro:
+    'A practical file for projects testing lower-cost storage routes, material availability, and supplier maturity beyond lithium-only procurement.',
+  status: 'Scale-up watch',
+  updated: 'Reviewed April 2026',
+  actions: [
+    { label: 'Request supplier screening', to: '/contact', primary: true },
+    { label: 'Back to overview', to: '/', primary: false },
+  ],
+  contents: [
+    { label: 'Brief', href: '#brief' },
+    { label: 'Source deck', href: '#source-deck' },
+  ],
+  metrics: [
+    { value: 'Na', label: 'abundant material route' },
+    { value: '2-4h', label: 'stationary storage screening window' },
+    { value: 'EU', label: 'cost-sensitive project fit' },
+  ],
+  briefs: [
+    {
+      kicker: 'Where it fits',
+      title: 'Cost-led stationary storage',
+      text: 'Best reviewed for stationary, mobility-adjacent, and backup applications where supply resilience and cost pressure are more important than maximum energy density.',
+    },
+    {
+      kicker: 'What to verify',
+      title: 'Factory evidence before volume',
+      text: 'Supplier screening should focus on cycle data, low-temperature performance, BMS integration, certification route, and real production capability.',
+    },
+    {
+      kicker: 'Decision risk',
+      title: 'Young market, uneven claims',
+      text: 'The opportunity is real, but qualification work matters because cell formats, warranty language, and bankability evidence can vary sharply by supplier.',
+    },
+  ],
+}
 </script>
 
 <template>
-  <ImageStackPage :images="images" crop-first-image />
+  <ImageStackPage
+    :images="images"
+    :topic="topic"
+    section-id="source-deck"
+    library-title="Sodium-ion source deck"
+    library-intro="Original technical visuals for sodium-ion discussions, kept as supporting evidence after the brief."
+    crop-first-image
+  />
 </template>

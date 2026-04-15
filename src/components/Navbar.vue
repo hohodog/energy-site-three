@@ -6,10 +6,10 @@ defineOptions({ name: 'SiteNavbar' })
 
 const menuItems = [
   { label: 'Home', path: '/' },
-  { label: 'Sodium-ion batteries', path: '/sodium' },
+  { label: 'Sodium-ion', path: '/sodium' },
   { label: 'Supercapacitors', path: '/supercapacitor' },
-  { label: 'Flow Batteries', path: '/redox' },
-  { label: 'solid-state batteries', path: '/solid' },
+  { label: 'Flow batteries', path: '/redox' },
+  { label: 'Solid-state', path: '/solid' },
   { label: 'About', path: '/about' },
 ]
 
@@ -44,13 +44,25 @@ onUnmounted(() => {
 
 <template>
   <header :class="['site-nav', { 'site-nav-scrolled': scrolled, 'site-nav-open': menuOpen }]">
+    <div class="eu-service-bar">
+      <div class="section-wrap service-bar-inner">
+        <span class="service-label">StorageLink Intelligence Desk</span>
+        <span class="service-meta">Europe-facing battery sourcing</span>
+        <span class="service-meta service-meta-right">Reviewed for 2026 tenders</span>
+      </div>
+    </div>
+
     <div class="section-wrap">
       <div class="nav-shell">
         <RouterLink class="brand" to="/" @click="closeMenu">
-          <span class="brand-mark" aria-hidden="true">SL</span>
+          <span class="brand-mark" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
           <span class="brand-copy">
             <strong>StorageLink</strong>
-            <span>EU-facing Battery Sourcing</span>
+            <span>Battery supply briefings for Europe</span>
           </span>
         </RouterLink>
 
@@ -67,7 +79,7 @@ onUnmounted(() => {
         </nav>
 
         <div class="nav-actions">
-          <RouterLink class="nav-contact" to="/contact">Contact</RouterLink>
+          <RouterLink class="nav-contact" to="/contact">Request a briefing</RouterLink>
 
           <button
             class="menu-toggle"
@@ -97,7 +109,7 @@ onUnmounted(() => {
               {{ item.label }}
             </RouterLink>
             <RouterLink to="/contact" class="mobile-link mobile-link-cta" @click="closeMenu">
-              Contact
+              Request a briefing
             </RouterLink>
           </nav>
         </div>
@@ -111,43 +123,49 @@ onUnmounted(() => {
   position: sticky;
   top: 0;
   z-index: 1200;
-  padding: 12px 0 0;
-  transition:
-    padding 0.22s ease,
-    transform 0.22s ease;
-}
-
-.site-nav::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto;
-  height: 96px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 245, 249, 0));
-  pointer-events: none;
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid var(--line-grey);
+  box-shadow: none;
+  transition: box-shadow 0.2s ease;
 }
 
 .site-nav-scrolled,
 .site-nav-open {
-  padding-top: 8px;
+  box-shadow: 0 8px 22px rgba(0, 40, 88, 0.08);
 }
 
-.nav-shell,
-.mobile-panel {
-  border: 1px solid var(--line-soft);
-  border-top: 4px solid var(--brand);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 10px 26px rgba(0, 40, 88, 0.07);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+.eu-service-bar {
+  color: #ffffff;
+  background: var(--brand-deep);
+}
+
+.service-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 34px;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.service-label {
+  font-weight: 700;
+}
+
+.service-meta {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.service-meta-right {
+  margin-left: auto;
 }
 
 .nav-shell {
   display: flex;
   align-items: center;
-  gap: 16px;
-  min-height: 66px;
-  padding: 10px 12px 10px 16px;
+  gap: 18px;
+  min-height: 76px;
 }
 
 .brand {
@@ -162,30 +180,23 @@ onUnmounted(() => {
 }
 
 .brand-mark {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  flex: 0 0 42px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  padding: 8px;
   border-radius: 6px;
   background: var(--brand);
-  color: #ffffff;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  box-shadow: none;
 }
 
-.brand-mark::after {
-  content: '';
-  position: absolute;
-  right: 7px;
-  bottom: 7px;
-  width: 7px;
-  height: 7px;
+.brand-mark span {
   border-radius: 2px;
+  background: #ffffff;
+}
+
+.brand-mark span:nth-child(2) {
   background: var(--accent);
 }
 
@@ -197,7 +208,7 @@ onUnmounted(() => {
 
 .brand-copy strong {
   color: var(--text-main);
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.1;
@@ -205,20 +216,17 @@ onUnmounted(() => {
 
 .brand-copy span {
   color: var(--text-muted);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 
 .nav-links {
   display: flex;
-  align-items: center;
-  gap: 2px;
-  padding: 0;
-  border: 1px solid rgba(0, 68, 148, 0.14);
-  border-radius: 8px;
-  background: var(--bg-blue-soft);
-  box-shadow: none;
+  align-items: stretch;
+  align-self: stretch;
+  gap: 0;
 }
 
 .nav-link,
@@ -226,33 +234,31 @@ onUnmounted(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
+  min-height: 44px;
+  border-radius: 0;
   color: var(--text-soft);
   text-decoration: none;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  padding: 10px 13px;
+  padding: 0 12px;
+  box-shadow: inset 0 -4px 0 transparent;
   transition:
     background 0.2s ease,
     color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
+    box-shadow 0.2s ease;
 }
 
 .nav-link:hover,
-.mobile-link:hover,
-.nav-link-active,
-.mobile-link-active {
+.nav-link:focus-visible,
+.nav-link-active {
   color: var(--brand);
-  background: #ffffff;
-  box-shadow: inset 0 -3px 0 var(--accent);
+  background: var(--bg-blue-soft);
+  box-shadow: inset 0 -4px 0 var(--accent);
+  text-decoration: none;
 }
 
 .brand:hover,
 .brand:focus-visible,
-.nav-link:hover,
-.nav-link:focus-visible,
-.nav-link-active,
 .mobile-link:hover,
 .mobile-link:focus-visible,
 .mobile-link-active,
@@ -281,23 +287,15 @@ onUnmounted(() => {
   font-weight: 700;
   letter-spacing: 0;
   background: var(--accent);
-  box-shadow: 0 10px 20px rgba(0, 68, 148, 0.14);
+  box-shadow: none;
   transition:
     transform 0.2s ease,
-    box-shadow 0.2s ease,
-    opacity 0.2s ease;
+    background 0.2s ease;
 }
 
 .nav-contact:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 22px rgba(0, 68, 148, 0.18);
-}
-
-.nav-link::after,
-.mobile-link::after,
-.nav-contact::after,
-.brand::after {
-  display: none;
+  background: var(--accent-strong);
 }
 
 .menu-toggle {
@@ -306,7 +304,7 @@ onUnmounted(() => {
   width: 46px;
   height: 46px;
   padding: 0;
-  border: 1px solid rgba(0, 68, 148, 0.18);
+  border: 1px solid var(--line-strong);
   border-radius: 8px;
   background: #ffffff;
   box-shadow: none;
@@ -334,28 +332,39 @@ onUnmounted(() => {
 }
 
 .mobile-panel {
-  margin-top: 10px;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 0 0 16px;
 }
 
 .mobile-links {
   display: grid;
-  gap: 8px;
+  gap: 1px;
+  border: 1px solid var(--line-grey);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--line-grey);
 }
 
 .mobile-link {
   justify-content: flex-start;
-  padding: 13px 14px;
-  border-radius: 6px;
+  min-height: 48px;
+  padding: 0 16px;
+  background: #ffffff;
+}
+
+.mobile-link:hover,
+.mobile-link:focus-visible,
+.mobile-link-active {
+  color: var(--brand);
   background: var(--bg-blue-soft);
+  box-shadow: inset 4px 0 0 var(--accent);
+  text-decoration: none;
 }
 
 .mobile-link-cta {
   justify-content: center;
-  margin-top: 6px;
   color: #000000;
   background: var(--accent);
+  box-shadow: none;
 }
 
 .mobile-fade-enter-active,
@@ -383,14 +392,18 @@ onUnmounted(() => {
 }
 
 @media (max-width: 720px) {
-  .site-nav {
-    padding-top: 10px;
+  .service-bar-inner {
+    gap: 10px;
+    min-height: 32px;
+    font-size: 11px;
+  }
+
+  .service-meta:not(.service-meta-right) {
+    display: none;
   }
 
   .nav-shell {
-    min-height: 64px;
-    padding-left: 14px;
-    padding-right: 12px;
+    min-height: 66px;
   }
 
   .brand-copy span {
@@ -398,15 +411,13 @@ onUnmounted(() => {
   }
 
   .brand-copy strong {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .brand-mark {
-    width: 38px;
-    height: 38px;
-    flex-basis: 38px;
-    border-radius: 6px;
-    font-size: 12px;
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
   }
 }
 </style>
